@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">📊 Dashboard</div>
+        <ul class="nav-links">
+            <li><a href="#" data-section="home" class="nav-link active">🏠 Home</a></li>
+            <li><a href="#" data-section="weather" class="nav-link">🌤️ Weather</a></li>
+            <li><a href="#" data-section="tasks" class="nav-link">✅ Tasks</a></li>
+            <li><a href="#" data-section="notes" class="nav-link">📝 Notes</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="welcome-card">
+                <h1 id="greeting" class="greeting">Good Morning</h1>
+                <p id="current-time" class="time"></p>
+                <p class="subtitle">Welcome to your personal dashboard</p>
+            </div>
+
+            <div class="quick-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">✅</div>
+                    <div class="stat-info">
+                        <h3 id="task-count">0</h3>
+                        <p>Active Tasks</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📝</div>
+                    <div class="stat-info">
+                        <h3 id="note-count">0</h3>
+                        <p>Notes</p>
+                    </div>
+                </div>
+                <div class="stat-card" id="weather-stat">
+                    <div class="stat-icon">🌡️</div>
+                    <div class="stat-info">
+                        <h3 id="quick-temp">--°F</h3>
+                        <p id="quick-condition">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Weather Section -->
+        <section id="weather" class="section">
+            <div class="section-header">
+                <h2>🌤️ Weather Dashboard</h2>
+            </div>
+
+            <div class="weather-controls">
+                <div class="location-input-group">
+                    <input type="text" id="location-input" placeholder="Enter city name (e.g., Chicago, IL)"
+                        class="location-input" />
+                    <button id="update-location-btn" class="btn btn-primary">Update Location</button>
+                </div>
+            </div>
+
+            <div class="weather-content">
+                <div class="weather-main">
+                    <div class="weather-icon-display">
+                        <img id="weather-icon" src="" alt="Weather icon" />
+                    </div>
+                    <div class="weather-temp">
+                        <h1 id="temperature">--°F</h1>
+                        <p id="weather-description">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="weather-details">
+                    <div class="weather-detail-card">
+                        <div class="detail-icon">🌡️</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Feels Like</p>
+                            <p id="feels-like" class="detail-value">--°F</p>
+                        </div>
+                    </div>
+                    <div class="weather-detail-card">
+                        <div class="detail-icon">💧</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Humidity</p>
+                            <p id="humidity" class="detail-value">--%</p>
+                        </div>
+                    </div>
+                    <div class="weather-detail-card">
+                        <div class="detail-icon">💨</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Wind Speed</p>
+                            <p id="wind-speed" class="detail-value">-- mph</p>
+                        </div>
+                    </div>
+                    <div class="weather-detail-card">
+                        <div class="detail-icon">🧭</div>
+                        <div class="detail-info">
+                            <p class="detail-label">Pressure</p>
+                            <p id="pressure" class="detail-value">-- hPa</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="current-location">
+                    <p>📍 <span id="current-location-display">Chicago, IL</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tasks Section -->
+        <section id="tasks" class="section">
+            <div class="section-header">
+                <h2>✅ To-Do List</h2>
+            </div>
+
+            <div class="task-input-container">
+                <input type="text" id="task-input" placeholder="Add a new task..." class="task-input" />
+                <button id="add-task-btn" class="btn btn-primary">Add Task</button>
+            </div>
+
+            <div class="task-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="active">Active</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <div id="task-list" class="task-list">
+                <!-- Tasks will be dynamically added here -->
+            </div>
+
+            <div class="task-summary">
+                <p><span id="active-task-count">0</span> active tasks remaining</p>
+            </div>
+        </section>
+
+        <!-- Notes Section -->
+        <section id="notes" class="section">
+            <div class="section-header">
+                <h2>📝 Notes</h2>
+                <button id="add-note-btn" class="btn btn-primary">+ New Note</button>
+            </div>
+
+            <div id="notes-grid" class="notes-grid">
+                <!-- Notes will be dynamically added here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Note Modal -->
+    <div id="note-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">New Note</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="note-title-input" placeholder="Note title..." class="note-title-input" />
+                <textarea id="note-content-input" placeholder="Write your note here..." class="note-content-input"
+                    rows="8"></textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="cancel-note-btn" class="btn btn-secondary">Cancel</button>
+                <button id="save-note-btn" class="btn btn-primary">Save Note</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
