@@ -542,3 +542,56 @@ window.deleteTask = deleteTask;
 window.editTask = editTask;
 window.openNoteModal = openNoteModal;
 window.deleteNote = deleteNote;
+
+
+
+// Contact Form Functionality
+const contactForm = document.getElementById('contact-form');
+const contactSuccess = document.getElementById('contact-success');
+const contactError = document.getElementById('contact-error');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const formData = {
+        name: document.getElementById('contact-name').value,
+        email: document.getElementById('contact-email').value,
+        subject: document.getElementById('contact-subject').value,
+        message: document.getElementById('contact-message').value,
+        timestamp: new Date().toISOString()
+    };
+    
+    // Simulate sending (store in localStorage for now)
+    try {
+        // Get existing messages or initialize empty array
+        let messages = JSON.parse(localStorage.getItem('contactMessages')) || [];
+        messages.push(formData);
+        localStorage.setItem('contactMessages', JSON.stringify(messages));
+        
+        // Show success message
+        contactSuccess.style.display = 'block';
+        contactError.style.display = 'none';
+        
+        // Reset form
+        contactForm.reset();
+        
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+            contactSuccess.style.display = 'none';
+        }, 5000);
+        
+        console.log('Message saved:', formData);
+    } catch (error) {
+        // Show error message
+        contactError.style.display = 'block';
+        contactSuccess.style.display = 'none';
+        
+        // Hide error message after 5 seconds
+        setTimeout(() => {
+            contactError.style.display = 'none';
+        }, 5000);
+        
+        console.error('Error saving message:', error);
+    }
+});
